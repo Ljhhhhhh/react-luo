@@ -17,16 +17,16 @@ import Page2 from './container/page2'; // 子页面2
 import Page3 from './container/page3'; // 子页面3
 
 /** 组件 **/
-interface Props extends FormComponentProps {
+interface InterfaceProps extends FormComponentProps {
   count: number; // 来自store - test model中的全局变量count
   location: any; // 自动注入的location对象
   match: any; // 自动注入的match对象
   history: any; // 自动注入的history对象
   actions: any; // 上面model中定义的actions对象，自动成为this.props.actions变量
 }
-class TestPageContainer extends React.Component<Props, any> {
+class TestPageContainer extends React.Component<InterfaceProps, any> {
   /** react生命周期 - 构造函数 **/
-  constructor(props: Props) {
+  constructor(props: InterfaceProps) {
     super(props);
     this.state = {
       visible: false, // 模态框隐藏和显示
@@ -37,10 +37,12 @@ class TestPageContainer extends React.Component<Props, any> {
   }
 
   /** react生命周期 - 废弃 - 组件初始化完毕DOM挂载之前 触发1次 **/
-  UNSAFE_componentWillMount() {}
+  public UNSAFE_componentWillMount() {
+    console.log('组件初挂载之前触发');
+  }
 
   /** react生命周期 - 组件初始化完毕DOM挂载完毕后 触发1次 **/
-  componentDidMount() {
+  public componentDidMount() {
     console.log('所有页面默认拥有的3个对象：', this.props.location, this.props.match, this.props.history);
     const set = new Set([1, 2, 3]);
     const map = new Map();
@@ -71,16 +73,18 @@ class TestPageContainer extends React.Component<Props, any> {
    * @param nextState 下一轮最新的state对象
    * @returns {boolean} 返回true表示更新，返回false表示跳过本次render
    */
-  shoudComponentUpdate(nextProps: any, nextState: any) {
+  public shoudComponentUpdate(nextProps: any, nextState: any) {
     return true;
   }
 
   /**
-   * react生命周期 - 废弃 - 是否执行下一次render
+   * react生命周期 - 废弃 - Props变化时触发
    * props对象有变化时触发
    * @param nextProps 变化后的最新的props
    */
-  UNSAFE_componentWillReceiveProps(nextProps: any) {}
+  public UNSAFE_componentWillReceiveProps(nextProps: any) {
+    console.log('Props变化时触发');
+  }
 
   /**
    * react生命周期 - props改变时触发
@@ -88,7 +92,7 @@ class TestPageContainer extends React.Component<Props, any> {
    * @param prevState 当前的state对象
    * @returns {object} 返回一个对象或null，如果返回对象将自动覆盖this.state中对应的值
    */
-  static getDerivedStateFromProps(nextProps: any, prevState: any) {
+  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
     if (nextProps.count !== prevState.count) {
       return {
         count: nextProps.count,
@@ -102,7 +106,7 @@ class TestPageContainer extends React.Component<Props, any> {
    * @param nextProps 下一轮最新的props
    * @param nextStates 下一轮最新的state
    */
-  UNSAFE_componentWillUpdate(nextProps: any, nextStates: any) {}
+  public UNSAFE_componentWillUpdate(nextProps: any, nextStates: any) {}
 
   /** react生命周期
    * 在下一轮render即将开始时触发，比componentWillUpdate后执行
@@ -112,7 +116,7 @@ class TestPageContainer extends React.Component<Props, any> {
    * @param prevState 当前的this.state对象
    * @returns {any} 返回值将作为componentDidUpdate的第3个参数传入
    * **/
-  getSnapshotBeforeUpdate(prevProps: any, prevState: any): object {
+  public getSnapshotBeforeUpdate(prevProps: any, prevState: any): object {
     return null;
   }
 
@@ -121,7 +125,7 @@ class TestPageContainer extends React.Component<Props, any> {
    * @param prevProps render完成后当前的this.props对象
    * @param prevState render完成后当前的this.state对象
    */
-  componentDidUpdate(prevProps: any, prevState: any) {}
+  public componentDidUpdate(prevProps: any, prevState: any) {}
 
   /**
    * react生命周期 - 每次当前组件下的子组件中有任何报错时，触发1次
@@ -130,36 +134,36 @@ class TestPageContainer extends React.Component<Props, any> {
    * @param error 报的是什么错
    * @param info 报错信息
    */
-  getDerivedStateFromError(error: any, info: any) {}
+  public getDerivedStateFromError(error: any, info: any) {}
 
   /**
    * react生命周期 - 每次当前组件下的子组件中有任何报错时，触发1次
    * @param error 报的是什么错
    * @param info 错误的触发记录，会显示代码哪一行报的错
    */
-  componentDidCatch(error: any, info: any) {}
+  public componentDidCatch(error: any, info: any) {}
 
   /**
    * react生命周期 - 组件即将被卸载时触发
    * **/
-  componentWillUnmount() {}
+  public componentWillUnmount() {}
 
   // 打开模态框按钮被点击时触发
-  onBtnClick() {
+  private onBtnClick() {
     this.setState({
       visible: true,
     });
   }
 
   // 关闭模态框
-  handleCancel() {
+  private handleCancel() {
     this.setState({
       visible: false,
     });
   }
 
   // Ajax测试按钮被点击时触发（这里是直接在类中定义箭头函数的语法）
-  onAjaxClick = () => {
+  private onAjaxClick = () => {
     this.props.actions.serverAjax().then((res: any) => {
       if (res.status === 200) {
         this.setState({
@@ -172,7 +176,7 @@ class TestPageContainer extends React.Component<Props, any> {
   };
 
   // Fetch测试按钮点击时触发
-  onFetchClick() {
+  private onFetchClick() {
     this.props.actions.serverFetch().then((res: any) => {
       if (res.status === 200) {
         this.setState({
@@ -184,7 +188,7 @@ class TestPageContainer extends React.Component<Props, any> {
     });
   }
 
-  render() {
+  public render() {
     const { form } = this.props;
 
     return (

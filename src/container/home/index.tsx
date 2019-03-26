@@ -1,11 +1,11 @@
 /** 主页 **/
 
 /** 所需的各种插件 **/
-import * as React from "react";
-import { connect } from "react-redux";
-import * as ImgLogo from "@/assets/react-logo.jpg";
+import React from 'react';
+import { connect } from 'react-redux';
+import ImgLogo from '@/assets/react-logo.jpg';
 /** 所需的各种资源 **/
-import "./index.less";
+import './index.less';
 
 function HomePageContainer() {
   return (
@@ -13,17 +13,10 @@ function HomePageContainer() {
       <div className="box">
         <img src={ImgLogo} />
         <div className="title">React-Luo</div>
-        <div className="info">
-          react16、redux4、router4、webpack4、eslint、babel7、antd
-        </div>
+        <div className="info">react16、redux4、router4、webpack4、eslint、babel7、antd</div>
       </div>
     </div>
   );
 }
 
-export default connect(
-  state => ({}),
-  model => ({
-    actions: {}
-  })
-)(HomePageContainer);
+export default connect()(HomePageContainer);

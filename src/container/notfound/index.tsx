@@ -1,11 +1,11 @@
 /** 404 NotFound **/
 
 /** 所需的各种插件 **/
-import * as React from "react";
-import { connect } from "react-redux";
+import * as React from 'react';
+import { connect } from 'react-redux';
 
 /** 所需的所有资源 **/
-import "./index.less";
+import './index.less';
 
 function HomePageContainer() {
   return (
@@ -15,9 +15,4 @@ function HomePageContainer() {
   );
 }
 
-export default connect(
-  state => ({}),
-  model => ({
-    actions: {}
-  })
-)(HomePageContainer);
+export default connect()(HomePageContainer);

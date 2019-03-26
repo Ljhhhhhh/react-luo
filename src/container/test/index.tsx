@@ -1,8 +1,7 @@
 /** 测试页 **/
 
 /** 所需的各种插件 **/
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom';
 
@@ -14,31 +13,25 @@ import Page3 from './container/page3'; // 子页面3
 import './index.less';
 import * as ImgTest from '../../assets/test.jpg';
 import * as Mp3 from '@/assets/starSky.mp3'; // @ 指向src目录
-interface Props {
+interface InterfaceProps {
   count: number; // 来自store - test model中的全局变量count
   location: any; // 自动注入的location对象
   match: any; // 自动注入的match对象
   history: any; // 自动注入的history对象
-  actions: {
-    // 上面model中定义的actions对象，自动成为this.props.actions变量
-    getUserinfo: Function;
-    serverAjax: Function;
-    serverFetch: Function;
-    onTestAdd: Function;
-  };
+  actions: any; // 上面model中定义的actions对象，自动成为this.props.actions变量
   form: any; // antd的form表单高阶组件自动注入的form对象
 }
-interface Res {
+interface InterfaceRes {
   data: any;
   status: any;
 }
 /** 组件 **/
-function TestPageContainer({ count, location, match, history, actions, form }: Props) {
+function TestPageContainer({ count, location, match, history, actions, form }: InterfaceProps) {
   const [visible, setVisible] = useState(false); // 模态框隐藏和显示
   const [mokeFetch, setMokeFetch] = useState([]); // 用于测试fetch请求
   const [mokeAjax, setMokeAjax] = useState([]); // 用于测试ajax请求
   const [localCount, setLocalCount] = useState(0); // 数字
-  let a: string = '5';
+
   // 仅组件加载完毕时触发一次
   useEffect(() => {
     console.log('所有页面默认拥有的3个对象：', location, match, history);
@@ -53,7 +46,7 @@ function TestPageContainer({ count, location, match, history, actions, form }: P
     // 获取用户信息测试
     actions
       .getUserinfo({ id: 1 })
-      .then((res: Res) => {
+      .then((res: InterfaceRes) => {
         console.log('获取用户信息测试：', res);
       })
       .catch(() => {
@@ -71,7 +64,7 @@ function TestPageContainer({ count, location, match, history, actions, form }: P
 
   // Ajax测试按钮被点击时触发（这里是直接在类中定义箭头函数的语法）
   function onAjaxClick() {
-    actions.serverAjax().then((res: Res) => {
+    actions.serverAjax().then((res: InterfaceRes) => {
       if (res.status === 200) {
         setMokeAjax(res.data);
       } else {
@@ -82,7 +75,7 @@ function TestPageContainer({ count, location, match, history, actions, form }: P
 
   // Fetch测试按钮点击时触发
   function onFetchClick() {
-    actions.serverFetch().then((res: Res) => {
+    actions.serverFetch().then((res: InterfaceRes) => {
       if (res.status === 200) {
         setMokeFetch(res.data);
       } else {

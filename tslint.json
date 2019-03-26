@@ -1,0 +1,17 @@
+{
+  "extends": "tslint:latest",
+  "rules": {
+    "ordered-imports": false,
+    "jsdoc-format": false,
+    "quotemark": false,
+    "object-literal-sort-keys": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "no-console": false,
+    "no-empty": false,
+    "arrow-parens": false,
+    "member-ordering": false,
+    "semicolon": false,
+    "max-line-length": false
+  }
+}

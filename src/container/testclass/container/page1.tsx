@@ -1,18 +1,17 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // ==================
 // 组件
 // ==================
 class Page1 extends React.Component {
-  constructor(props:any) {
+  constructor(props: any) {
     super(props);
     this.state = {};
   }
 
-  render() {
+  public render() {
     return <div className="son">A 子container 1</div>;
   }
 }
@@ -20,6 +19,6 @@ class Page1 extends React.Component {
 export default connect(
   state => ({}),
   dispatch => ({
-    actions: bindActionCreators({}, dispatch)
-  })
-)(Page1)
+    actions: bindActionCreators({}, dispatch),
+  }),
+)(Page1);

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // ==================
 // 组件
@@ -10,8 +10,8 @@ function Page2() {
 }
 
 export default connect(
-  state => ({}),
-  dispatch => ({
-    actions: bindActionCreators({}, dispatch)
-  })
+  null,
+  (dispatch: any) => ({
+    actions: bindActionCreators({}, dispatch),
+  }),
 )(Page2);

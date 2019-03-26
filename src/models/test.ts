@@ -6,13 +6,13 @@
 import { message } from 'antd';
 import Server from '../util/fetch-api'; // 自己封装的异步请求方法
 
-interface Model {
+interface InterfaceModel {
   state: any;
   reducers: any;
   effects: any;
 }
 
-const model: Model = {
+const model: InterfaceModel = {
   /** store数据 **/
   state: {
     count: 0, // 测试数字
@@ -20,14 +20,10 @@ const model: Model = {
   },
   reducers: {
     setCount(state: any, payload: any) {
-      return Object.assign({}, state, {
-        count: payload,
-      });
+      return { ...state, count: payload };
     },
     setFetchValue(state: any, payload: any) {
-      return Object.assign({}, state, {
-        fetchvalue: payload,
-      });
+      return { ...state, fetchvalue: payload };
     },
   },
   /** actions **/
